@@ -1,1 +1,160 @@
-/*# sourceMappingURL=style.css.map */
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+::-moz-placeholder {
+  color: hsl(236, 9%, 61%);
+}
+
+::placeholder {
+  color: hsl(236, 9%, 61%);
+}
+
+.main {
+  max-width: 1440px;
+  width: 100%;
+  height: 100vh;
+  background: url(../images/bg-desktop-light.jpg) no-repeat;
+}
+
+.todoContainer {
+  max-width: 1440px;
+  width: 40%;
+  margin: 0 auto;
+}
+.todoContainer .topPart {
+  padding-top: 4em;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2em;
+}
+.todoContainer .topPart .heading {
+  letter-spacing: 0.5em;
+  font-size: 2rem;
+}
+.todoContainer .middlePart {
+  margin-bottom: 2em;
+}
+.todoContainer .middlePart .inputContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border-radius: 0.25em;
+}
+.todoContainer .middlePart .inputContainer .checkContainer {
+  padding: 1em;
+  padding-right: 0em;
+}
+.todoContainer .middlePart .inputContainer .checkContainer .checkDiv {
+  height: 20px;
+  width: 20px;
+  border: 1px solid hsl(233, 11%, 84%);
+  border-radius: 50%;
+  background-color: white;
+}
+.todoContainer .middlePart .inputContainer .mainInput {
+  padding: 0.75em;
+  width: 100%;
+  border: none;
+  outline: none;
+  color: hsl(235, 19%, 35%);
+  border-radius: 0.25em;
+  font-size: 1.25rem;
+}
+.todoContainer .middlePart .inputContainer .mainInput .inputContainer {
+  width: 100%;
+  padding: 0.25em 0em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border-radius: 0.25em;
+}
+
+.bottomPart {
+  background: white;
+  border-radius: 0.25em;
+  box-shadow: 0px 0px 40px hsl(236, 9%, 61%);
+}
+.bottomPart .taskContainer {
+  background: white;
+  border-radius: 0.25em 0.25em 0em 0em;
+  display: flex;
+  position: relative;
+  border-bottom: 1px solid hsl(236, 33%, 92%);
+  align-items: center;
+}
+.bottomPart .taskContainer .taskCheckContainer {
+  padding: 1em;
+  padding-right: 0em;
+  position: relative;
+}
+.bottomPart .taskContainer .taskCheckContainer .taskCheck {
+  height: 20px;
+  width: 20px;
+  border: 1px solid hsl(233, 11%, 84%);
+  border-radius: 50%;
+  background-color: white;
+}
+.bottomPart .taskContainer .taskCheckContainer .taskChecked {
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  border: 1px solid hsl(233, 11%, 84%);
+  border-radius: 50%;
+  background: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}
+.bottomPart .taskContainer .taskCheckContainer .taskChecked::before {
+  content: "";
+  position: absolute;
+  height: 8px;
+  width: 2px;
+  background: white;
+  left: 53%;
+  top: -4px;
+  transform: translate(7%, 115%) rotate(45deg);
+}
+.bottomPart .taskContainer .taskCheckContainer .taskChecked::after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  width: 2px;
+  left: 30%;
+  top: 41%;
+  background: white;
+  transform: translate(7%, 10%) rotate(-45deg);
+}
+.bottomPart .taskContainer .taskData {
+  color: hsl(235, 19%, 35%);
+  padding: 0.75em;
+  font-size: 1.25em;
+}
+.bottomPart .taskContainer .cross {
+  position: absolute;
+  right: 2em;
+}
+.bottomPart .taskContainer .cross .cross01 {
+  height: 20px;
+  display: inline-block;
+  width: 2px;
+  background: hsl(235, 19%, 35%);
+  transform: rotate(45deg) translate(5px, -4px);
+}
+.bottomPart .taskContainer .cross .cross02 {
+  height: 20px;
+  display: inline-block;
+  width: 2px;
+  transform: rotate(-45deg);
+  background: hsl(235, 19%, 35%);
+}
+
+.none {
+  display: none;
+}/*# sourceMappingURL=style.css.map */
