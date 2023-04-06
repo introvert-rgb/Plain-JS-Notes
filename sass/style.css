@@ -136,9 +136,13 @@
   padding: 0.75em;
   font-size: 1.25em;
 }
+.bottomPart .taskContainer .taskData:hover {
+  color: hsl(236, 9%, 61%);
+}
 .bottomPart .taskContainer .cross {
-  position: absolute;
-  right: 2em;
+  position: relative;
+  width: 40px;
+  z-index: 10;
 }
 .bottomPart .taskContainer .cross .cross01 {
   height: 20px;
@@ -155,6 +159,51 @@
   background: hsl(235, 19%, 35%);
 }
 
+.taskFilters {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em 0em;
+  background: white;
+  font-size: 1rem;
+  color: hsl(236, 9%, 61%);
+  border-radius: 0em 0em 0.25em 0.25em;
+  box-shadow: 0px 0px 40px hsl(236, 9%, 61%);
+}
+.taskFilters button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: hsl(236, 9%, 61%);
+  outline: none;
+}
+.taskFilters .itemsLeft {
+  padding-left: 1em;
+}
+.taskFilters .taskStates button {
+  margin: 0em 1em;
+}
+.taskFilters .clearCompleted {
+  padding-right: 1em;
+}
+
 .none {
   display: none;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: hsl(233, 11%, 84%) !important;
+}
+
+.hover {
+  height: 16px !important;
+  width: 16px !important;
+  position: relative;
+  left: 2px;
+  top: 1px;
+  z-index: 10;
+}
+
+button:hover {
+  cursor: pointer;
 }/*# sourceMappingURL=style.css.map */

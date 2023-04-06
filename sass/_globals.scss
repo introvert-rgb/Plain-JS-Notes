@@ -93,6 +93,7 @@
             padding: 1em;
             padding-right: 0em;
             position: relative;
+           
             .taskCheck{
                 height: 20px;
                 width: 20px;
@@ -134,10 +135,17 @@
              color: $veryDarkGrayishBlue;
              padding: 0.75em;
              font-size: 1.25em;
+             &:hover{
+                    color: $darkGrayishBlue;
+             }
          }
          .cross{
-           position:absolute;
-           right: 2em;
+           position:relative;
+           
+           width: 40px;
+           
+           z-index: 10;
+           
             .cross01{
                 height: 20px;
                 display: inline-block;
@@ -154,8 +162,61 @@
             }
          }
     }
+    
 }
+.taskFilters {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em 0em;
+    background: white;
+    font-size: 1rem;
+    color: $darkGrayishBlue;
+    border-radius:0em 0em 0.25em 0.25em;
+    box-shadow: 0px 0px 40px $darkGrayishBlue;
+    button {
+        background: none;
+        border: none;
+        font-size: 1rem;
+        color: $darkGrayishBlue;
+        outline: none;
+    }
 
+    .itemsLeft {
+        padding-left: 1em;
+    }
+
+    .taskStates {
+        button {
+            margin: 0em 1em;
+        }
+
+    }
+
+    .clearCompleted {
+        padding-right: 1em;
+    }
+}
 .none{
     display: none;
+}
+.completed{
+text-decoration: line-through;
+color:$lightGrayishBlue !important;
+}
+.hover{
+    height: 16px !important;
+    width: 16px !important;
+  
+        position: relative;
+       
+        left: 2px;
+        top: 1px;
+        z-index: 10;
+       
+}
+
+button{
+    &:hover{
+        cursor: pointer;
+    }
 }
