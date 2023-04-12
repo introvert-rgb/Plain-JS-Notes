@@ -8,10 +8,23 @@
 ::placeholder{
     color:$darkGrayishBlue;
 }
+.dark{
+    background-color: $veryDarkBlue;
+}
+.darkTask{
+    background-color: $veryDarkGrayishBlueDark !important;
+    color: $lightGrayishBlue !important;
+     
+}
+
+.darkBack{
+    background: url(../images/bg-desktop-dark.jpg) no-repeat !important;
+}
 .main{
     max-width: 1440px;
     width: 100%;
     height: 100vh;
+    background-color: $veryDarkBlue;
     background: url(../images/bg-desktop-light.jpg) no-repeat;
     
 }
@@ -34,7 +47,7 @@
     }
 
     .middlePart{
-        margin-bottom: 2em;
+        margin-bottom: 2em;border-radius: 0.25em;
         .inputContainer{
             width: 100%;
             display: flex;
@@ -81,16 +94,18 @@
 .bottomPart{
     background: white;
     border-radius: 0.25em;
+     
     box-shadow: 0px 0px 40px $darkGrayishBlue;
     .taskContainer{
         background: white;
         border-radius: 0.25em 0.25em 0em 0em;
-        display: flex;
+        display: flex;justify-content: space-between;
         position: relative;
         border-bottom: 1px solid $veryLightGrayishBlue;
         align-items: center;
         .taskCheckContainer{
             padding: 1em;
+          
             padding-right: 0em;
             position: relative;
            
@@ -143,7 +158,7 @@
            position:relative;
            
            width: 40px;
-           
+         
            z-index: 10;
            
             .cross01{
@@ -224,3 +239,4 @@ button{
 .dashed{
     border: 5px solid black;
 }
+.fix{display: flex;}
