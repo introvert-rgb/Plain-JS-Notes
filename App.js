@@ -4,6 +4,12 @@ let allBtn = document.querySelector(".allBtn");
 let activeBtn = document.querySelector(".activeBtn");
 let completeBtn = document.querySelector(".completeBtn");
 let clearCompletedBtn = document.querySelector(".clearCompleted");
+
+
+let mobileAllBtn = document.querySelector(".mobileAllBtn");
+let mobileActiveBtn = document.querySelector(".mobileActiveBtn");
+let mobileCompleteBtn = document.querySelector(".mobileCompleteBtn");
+
 let icon = document.querySelector(".iconState");
 let body = document.querySelector("body");
 
@@ -18,14 +24,18 @@ icon.addEventListener("click", () => {
   document.querySelector(".inputContainer").classList.toggle("darkTask");
   document.querySelector(".checkDiv").classList.toggle("darkTask");
   document.querySelector(".taskFilters").classList.toggle("darkTask");
+   document.querySelector(".mobileTaskStates").classList.toggle("darkTask");
+
   if (body.classList.contains("dark")) {
     icon.setAttribute("src", "./images/icon-sun.svg");
     document.querySelector(".bottomPart").style.boxShadow = "none";
     document.querySelector(".taskFilters").style.boxShadow = "none";
+    document.querySelector(".mobileTaskStates").style.boxShadow = "none";
   } else {
     icon.setAttribute("src", "./images/icon-moon.svg");
     document.querySelector(".bottomPart").removeAttribute("style");
     document.querySelector(".taskFilters").removeAttribute("style");
+    document.querySelector(".mobileTaskStates").removeAttribute("style");
   }
   if (document.querySelectorAll(".taskContainer").length > 0) {
     document.querySelectorAll(".taskContainer").forEach((item) => {
@@ -52,9 +62,24 @@ input.addEventListener("change", (e) => {
 
   // resets the input field
   input.value = "";
-  if (taskArray.length > 0) filterOptions.classList.remove("none");
-  else filterOptions.classList.add("none");
-
+  if(document.querySelector('body').classList.contains('dark')){
+    if (document.querySelectorAll(".taskContainer").length > 0) {
+      document.querySelectorAll(".taskContainer").forEach((item) => {
+        item.classList.add("darkTask");
+      });
+      document.querySelectorAll(".taskData").forEach((item) => {
+        item.classList.add("darkTask");
+      });
+      document.querySelectorAll(".taskCheck").forEach((item) => {
+        item.classList.add("darkTask");
+      });
+    }
+  }
+  if (taskArray.length > 0){ filterOptions.classList.remove("none");
+  document.querySelector(".mobileTaskStates").classList.remove("none");
+}else {filterOptions.classList.add("none");
+document.querySelector(".mobileTaskStates").classList.add("none");
+}
   saveLocalTodos(inputVal);
   updateItemCount(document.querySelectorAll(".active").length);
 });
@@ -68,13 +93,14 @@ function createTask(value, state = "false") {
   task.classList.add("taskContainer");
   task.setAttribute("draggable", "true");
   task.innerHTML = `
- <div class="taskCheckContainer " ischecked=${state}>
+ <div class="fix">
+    <div class="taskCheckContainer " ischecked=${state}>
             <div class="taskChecked none" ></div>
             <div class="taskCheck"></div>
-        </div>
-        <div class="taskData active" >${value}</div>
-       
-         <div class="cross ">
+    </div>
+    <div class="taskData active" >${value}</div>
+  </div>
+         <div class="cross">
                 <span class="cross01"></span>
                 <span class="cross02"></span>
             </div>`;
@@ -156,9 +182,12 @@ function showSavedToDos() {
     todos.map((val) => {
       updateTask(val);
     });
-    if (todos.length > 0) filterOptions.classList.remove("none");
-    else filterOptions.classList.add("none");
-  }
+   if (todos.length > 0) {filterOptions.classList.remove("none");
+document.querySelector('.mobileTaskStates').classList.remove('none');}
+  else {filterOptions.classList.add("none");
+document.querySelector(".mobileTaskStates").classList.add("none");}
+}
+  
 
   updateItemCount(document.querySelectorAll(".active").length);
 }
@@ -174,8 +203,10 @@ function deleteTodos(value) {
 
   localStorage.setItem("todos", JSON.stringify(todos));
 
-  if (todos.length > 0) filterOptions.classList.remove("none");
-  else filterOptions.classList.add("none");
+  if (todos.length > 0) {filterOptions.classList.remove("none");
+document.querySelector('.mobileTaskStates').classList.remove('none');}
+  else {filterOptions.classList.add("none");
+document.querySelector(".mobileTaskStates").classList.add("none");}
 }
 
 function updateTask(value, state = "false") {
@@ -247,46 +278,91 @@ function updateTask(value, state = "false") {
     updateItemCount(document.querySelectorAll(".active").length);
   });
 }
+
 allBtn.addEventListener("click", () => {
   document.querySelectorAll(".completed").forEach((item) => {
-    item.parentElement.classList.remove("none");
+    item.parentElement.parentElement.classList.remove("none");
   });
   document.querySelectorAll(".active").forEach((item) => {
-    item.parentElement.classList.remove("none");
+    item.parentElement.parentElement.classList.remove("none");
   });
+  
 });
 activeBtn.addEventListener("click", () => {
-  document.querySelectorAll(".completed").forEach((item) => {
-    item.parentElement.classList.add("none");
-  });
+  if (document.querySelectorAll(".active").length == 0){
+    return;
+  }else{
+    document.querySelectorAll(".completed").forEach((item) => {
+      item.parentElement.parentElement.classList.add("none");
+    });
 
   document.querySelectorAll(".active").forEach((item) => {
-    item.parentElement.classList.remove("none");
+    item.parentElement.parentElement.classList.remove("none");
   });
-});
+}});
 
 completeBtn.addEventListener("click", () => {
   if (document.querySelectorAll(".completed").length == 0) {
     console.log('hey')
     return;
   } else {console.log("hell no");
-    document.querySelectorAll(".active").forEach((item) => {
-      item.parentElement.classList.add("none");
-    });
+   
     document.querySelectorAll(".completed").forEach((item) => {
-      item.parentElement.classList.remove("none");
+      item.parentElement.parentElement.classList.remove("none");
     });
+     document.querySelectorAll(".active").forEach((item) => {
+       item.parentElement.parentElement.classList.add("none");
+     });
   }
 });
 
 clearCompletedBtn.addEventListener("click", () => {
   document.querySelectorAll(".completed").forEach((item) => {
-    item.parentElement.classList.add("none");
+    item.parentElement.parentElement.classList.add("none");
 
     deleteTodos(item.innerHTML);
   });
 
   document.querySelectorAll(".active").forEach((item) => {
-    item.parentElement.classList.remove("none");
+    item.parentElement.parentElement.classList.remove("none");
   });
+});
+
+
+mobileAllBtn.addEventListener("click", () => {
+  document.querySelectorAll(".completed").forEach((item) => {
+    item.parentElement.parentElement.classList.remove("none");
+  });
+  document.querySelectorAll(".active").forEach((item) => {
+    item.parentElement.parentElement.classList.remove("none");
+  });
+});
+mobileActiveBtn.addEventListener("click", () => {
+  if (document.querySelectorAll(".active").length == 0) {
+    return;
+  } else {
+    document.querySelectorAll(".completed").forEach((item) => {
+      item.parentElement.parentElement.classList.add("none");
+    });
+
+    document.querySelectorAll(".active").forEach((item) => {
+      item.parentElement.parentElement.classList.remove("none");
+    });
+  }
+});
+
+mobileCompleteBtn.addEventListener("click", () => {
+  if (document.querySelectorAll(".completed").length == 0) {
+    console.log("hey");
+    return;
+  } else {
+    console.log("hell no");
+
+    document.querySelectorAll(".completed").forEach((item) => {
+      item.parentElement.parentElement.classList.remove("none");
+    });
+    document.querySelectorAll(".active").forEach((item) => {
+      item.parentElement.parentElement.classList.add("none");
+    });
+  }
 });
