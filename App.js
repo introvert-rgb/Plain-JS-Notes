@@ -1,6 +1,9 @@
 let input = document.querySelector(".mainInput");
 let filterOptions=document.querySelector(".taskFilters");
-
+let allBtn=document.querySelector('.allBtn');
+let activeBtn = document.querySelector(".activeBtn");
+let completeBtn = document.querySelector(".completeBtn");
+let clearCompletedBtn=document.querySelector(".clearCompleted");
 
 document.addEventListener('DOMContentLoaded', showSavedToDos)
 
@@ -26,7 +29,7 @@ if(taskArray.length>0) filterOptions.classList.remove('none');
 else filterOptions.classList.add("none");
 
 saveLocalTodos(inputVal);
-updateItemCount(document.querySelectorAll('.active').length)
+updateItemCount(document.querySelectorAll('.active').length);
  
 });
 
@@ -35,8 +38,11 @@ updateItemCount(document.querySelectorAll('.active').length)
 // task creation
 
 function createTask(value, state='false') {
+  let mainTaskContainer=document.createElement('div');
+   mainTaskContainer.classList.add("mainTaskContainer");
  let task=document.createElement('div');
  task.classList.add('taskContainer');
+ task.setAttribute('draggable','true');
  task.innerHTML = `
  <div class="taskCheckContainer " ischecked=${state}>
             <div class="taskChecked none" ></div>
@@ -50,9 +56,9 @@ function createTask(value, state='false') {
             </div>`;
  
 
-
+mainTaskContainer.appendChild(task);
   let taskContainer = document.querySelector(".bottomPart");
-  taskContainer.appendChild(task);
+  taskContainer.appendChild(mainTaskContainer);
 
 
 
@@ -105,9 +111,12 @@ if(getValue){
 task.querySelector(".cross").addEventListener("click", () => {
   
   deleteTodos(task.children[1].innerHTML);
-  taskContainer.removeChild(task);
-});
+  taskContainer.removeChild(mainTaskContainer);
+  updateItemCount(document.querySelectorAll(".active").length);
 
+  
+  
+});
 
 }
 
@@ -129,7 +138,7 @@ function saveLocalTodos(todo){
 
   todos.push(todo);
   localStorage.setItem("todos", JSON.stringify(todos));
-  console.log(todos)
+
 }
 function showSavedToDos(){
   let todos;
@@ -143,7 +152,7 @@ function showSavedToDos(){
     if (todos.length > 0) filterOptions.classList.remove("none");
 else filterOptions.classList.add("none");
   }
-console.log(todos);
+
 updateItemCount(document.querySelectorAll(".active").length);
 
 }
@@ -159,17 +168,21 @@ function deleteTodos(value) {
   todos.splice(todos.indexOf(value),1);
 
  localStorage.setItem('todos',JSON.stringify(todos));
+
 if (todos.length > 0) filterOptions.classList.remove("none");
 else filterOptions.classList.add("none");
 
-console.log(todos);
+
 }
 
 
 
 
 function updateTask(value, state='false') {
+   let mainTaskContainer = document.createElement("div");
+    mainTaskContainer.classList.add("mainTaskContainer");
  let task=document.createElement('div');
+  task.setAttribute("draggable", "true");
  task.classList.add('taskContainer');
  task.innerHTML = `
  <div class="taskCheckContainer " ischecked=${state}>
@@ -185,8 +198,9 @@ function updateTask(value, state='false') {
  
 
 
-  let taskContainer = document.querySelector(".bottomPart");
-  taskContainer.appendChild(task);
+mainTaskContainer.appendChild(task);
+let taskContainer = document.querySelector(".bottomPart");
+taskContainer.appendChild(mainTaskContainer);
 
 
   task.querySelector(".taskCheckContainer").addEventListener("click", () => {
@@ -232,10 +246,52 @@ updateItemCount(document.querySelectorAll(".active").length);
 
 task.querySelector(".cross").addEventListener("click", () => {
   deleteTodos(task.children[1].innerHTML);
-  taskContainer.removeChild(task);
-  
+  taskContainer.removeChild(mainTaskContainer);
+  updateItemCount(document.querySelectorAll(".active").length);
+
 });
+
+
  
-
-
 }
+allBtn.addEventListener('click',()=>{
+  document.querySelectorAll(".completed").forEach((item) => {
+    item.parentElement.classList.remove("none");
+  });
+  document.querySelectorAll(".active").forEach((item) => {
+    item.parentElement.classList.remove("none");
+  });
+});
+activeBtn.addEventListener('click',()=>{
+  document.querySelectorAll('.completed').forEach((item)=>{
+    item.parentElement.classList.add('none')
+  });
+
+  document.querySelectorAll(".active").forEach((item) => {
+    item.parentElement.classList.remove("none");
+  });
+})
+
+completeBtn.addEventListener('click',()=>{
+   document.querySelectorAll(".active").forEach((item) => {
+     item.parentElement.classList.add("none");
+   });
+    document.querySelectorAll(".completed").forEach((item) => {
+      item.parentElement.classList.remove("none");
+    });
+});
+
+clearCompletedBtn.addEventListener('click',()=>{
+  document.querySelectorAll(".completed").forEach((item) => {
+    item.parentElement.classList.add("none");
+
+     deleteTodos(item.innerHTML);
+     
+  });
+
+  document.querySelectorAll(".active").forEach((item) => {
+    item.parentElement.classList.remove("none");
+  });
+
+
+})

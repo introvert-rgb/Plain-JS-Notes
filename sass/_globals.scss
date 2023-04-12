@@ -197,7 +197,7 @@
     }
 }
 .none{
-    display: none;
+    display: none !important;
 }
 .completed{
 text-decoration: line-through;
@@ -219,4 +219,8 @@ button{
     &:hover{
         cursor: pointer;
     }
+}
+
+.dashed{
+    border: 5px solid black;
 }
